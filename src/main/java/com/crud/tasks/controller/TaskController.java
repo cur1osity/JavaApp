@@ -9,31 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/")
+@RequestMapping("/v1/tasks")
 public class TaskController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "tasks")
+    @RequestMapping(method = RequestMethod.GET, value = "")
     public List<TaskDto> getTasks() {
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "tasks/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public TaskDto getTask(@PathVariable("id") Long id) {
         return new TaskDto(id,"test title","test_content");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "tasks/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void deleteTask(@PathVariable("id") Long id) {
-
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "tasks/{id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public TaskDto updateTask(@PathVariable("id") Long id) {
         return new TaskDto(id,"Edited test title","Test content");
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "tasks")
+    @RequestMapping(method = RequestMethod.POST, value = "")
     public void createTask(TaskDto taskDto) {
-
     }
 }
