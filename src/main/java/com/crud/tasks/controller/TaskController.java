@@ -18,16 +18,16 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public TaskDto getTask(@PathVariable Long id) {
+    public TaskDto getTask(@PathVariable long id) {
         return new TaskDto(id,"test title","test_content");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    public void deleteTask(@PathVariable Long id) {
+    public void deleteTask(@PathVariable long id) {
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public TaskDto updateTask(@PathVariable Long id) {
+    public TaskDto updateTask(@PathVariable long id) {
         return new TaskDto(id,"Edited test title","Test content");
     }
 
