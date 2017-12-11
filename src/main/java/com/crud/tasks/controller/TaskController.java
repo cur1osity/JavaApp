@@ -12,26 +12,26 @@ import java.util.List;
 @RequestMapping("/v1/tasks")
 public class TaskController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "")
+    @RequestMapping(method = RequestMethod.GET)
     public List<TaskDto> getTasks() {
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public TaskDto getTask(@PathVariable("id") Long id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public TaskDto getTask(@PathVariable Long id) {
         return new TaskDto(id,"test title","test_content");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void deleteTask(@PathVariable("id") Long id) {
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public void deleteTask(@PathVariable Long id) {
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public TaskDto updateTask(@PathVariable("id") Long id) {
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public TaskDto updateTask(@PathVariable Long id) {
         return new TaskDto(id,"Edited test title","Test content");
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "")
+    @RequestMapping(method = RequestMethod.POST)
     public void createTask(TaskDto taskDto) {
     }
 }
