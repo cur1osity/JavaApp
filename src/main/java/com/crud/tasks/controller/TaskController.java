@@ -1,37 +1,49 @@
 package com.crud.tasks.controller;
 
 import com.crud.tasks.domain.TaskDto;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.ArrayList;
+import com.crud.tasks.mapper.TaskMapper;
+import com.crud.tasks.service.DbService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/tasks")
 public class TaskController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @Autowired
+    private DbService service;
+
+    @Autowired
+    private TaskMapper taskMapper;
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<TaskDto> getTasks() {
-        return new ArrayList<>();
+        return taskMapper.mapToTaskDtoList(service.getAllTasks());
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public TaskDto getTask(@PathVariable long id) {
-        return new TaskDto(id,"test title","test_content");
+    @GetMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.OK)
+    public TaskDto getTask(@PathVariable long id) throws TaskNotFoundException {
+        return taskMapper.mapToTaskDto(service.getTask(id).orElseThrow(TaskNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.OK)
     public void deleteTask(@PathVariable long id) {
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public TaskDto updateTask(@PathVariable long id) {
         return new TaskDto(id,"Edited test title","Test content");
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void createTask(TaskDto taskDto) {
     }
 }
