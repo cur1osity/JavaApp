@@ -34,6 +34,7 @@ public class TaskController {
     @DeleteMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public void deleteTask(@PathVariable long id) {
+        service.deleteTask(id);
     }
 
     @PutMapping
