@@ -102,23 +102,6 @@ public class TaskController {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void deleteTasks() {
