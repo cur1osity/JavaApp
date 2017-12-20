@@ -48,17 +48,19 @@ public class TaskController {
     }
 
 
-    @PutMapping(consumes = APPLICATION_JSON_VALUE)
+    @PutMapping(value = {"/{id}"}, consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public TaskDto updateTask(@RequestBody TaskDto taskDto) throws TaskNotFoundException {
+    public TaskDto updateTask(@PathVariable Long id, @RequestBody TaskDto taskDto) throws TaskNotFoundException {
 
-        Task taskFromJSON = taskMapper.mapToTask(taskDto);
+        Task task = taskMapper.mapToTask(taskDto);
 
-        service.getTask(taskFromJSON.getId()).orElseThrow(TaskNotFoundException::new);
+        Task taskAfterUpdate = service.updateTaskWithId(id, task);
 
-        Task taskAfterSave = service.saveTask(taskFromJSON);
+        if(taskAfterUpdate == null) {
+            throw new TaskNotFoundException();
+        }
 
-        return taskMapper.mapToTaskDto(taskAfterSave);
+        return taskMapper.mapToTaskDto(taskAfterUpdate);
     }
 
 

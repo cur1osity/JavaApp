@@ -25,6 +25,18 @@ public class TaskService {
         return repository.save(task);
     }
 
+    public Task updateTaskWithId(Long id, Task task) {
+
+        if(repository.existsById(id)) {
+
+            task.setId(id);
+
+            return repository.save(task);
+        }
+
+        return null;
+    }
+
     public void deleteTask(Long id) {
         repository.deleteById(id);
     }

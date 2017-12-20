@@ -1,6 +1,7 @@
 package com.crud.tasks.repository;
 
 import com.crud.tasks.domain.Task;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,4 +26,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Override
     void deleteAllInBatch();
+
+    @Override
+    boolean existsById(Long id);
 }
