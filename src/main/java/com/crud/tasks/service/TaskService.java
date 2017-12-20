@@ -38,6 +38,10 @@ public class TaskService {
         throw new TaskNotFoundException();
     }
 
+    public boolean isTaskExist(Long id) {
+        return repository.existsById(id);
+    }
+
     public void deleteTask(Long id) {
         repository.deleteById(id);
     }

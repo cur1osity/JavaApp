@@ -60,6 +60,27 @@ public class TaskController {
     }
 
 
+//    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void createTask(@RequestBody TaskDto taskDto) throws TaskConflictException {
+//
+//        final Task taskFromJSON = taskMapper.mapToTask(taskDto);
+//
+//        if (taskFromJSON.getId() != null) {
+//
+//            Task task = service.getTask(taskFromJSON.getId()).orElse(service.saveTask(taskFromJSON));
+//
+//            if (task.getId() == taskFromJSON.getId()) {
+//
+//                throw new TaskConflictException();
+//            }
+//
+//        } else {
+//
+//            service.saveTask(taskFromJSON);
+//        }
+//    }
+
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void createTask(@RequestBody TaskDto taskDto) throws TaskConflictException {
@@ -68,18 +89,35 @@ public class TaskController {
 
         if (taskFromJSON.getId() != null) {
 
-            Task task = service.getTask(taskFromJSON.getId()).orElse(service.saveTask(taskFromJSON));
-
-            if (task.getId() == taskFromJSON.getId()) {
+            if (service.isTaskExist(taskFromJSON.getId())) {
 
                 throw new TaskConflictException();
             }
+
+            service.saveTask(taskFromJSON);
 
         } else {
 
             service.saveTask(taskFromJSON);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
