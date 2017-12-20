@@ -56,10 +56,6 @@ public class TaskController {
 
         Task taskAfterUpdate = service.updateTaskWithId(id, task);
 
-        if(taskAfterUpdate == null) {
-            throw new TaskNotFoundException();
-        }
-
         return taskMapper.mapToTaskDto(taskAfterUpdate);
     }
 
