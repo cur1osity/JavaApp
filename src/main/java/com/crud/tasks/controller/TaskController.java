@@ -7,14 +7,13 @@ import com.crud.tasks.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 @RestController
 @RequestMapping("/v1/tasks")
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     @Autowired
@@ -59,27 +58,6 @@ public class TaskController {
         return taskMapper.mapToTaskDto(taskAfterUpdate);
     }
 
-
-//    @PostMapping(consumes = APPLICATION_JSON_VALUE)
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void createTask(@RequestBody TaskDto taskDto) throws TaskConflictException {
-//
-//        final Task taskFromJSON = taskMapper.mapToTask(taskDto);
-//
-//        if (taskFromJSON.getId() != null) {
-//
-//            Task task = service.getTask(taskFromJSON.getId()).orElse(service.saveTask(taskFromJSON));
-//
-//            if (task.getId() == taskFromJSON.getId()) {
-//
-//                throw new TaskConflictException();
-//            }
-//
-//        } else {
-//
-//            service.saveTask(taskFromJSON);
-//        }
-//    }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
