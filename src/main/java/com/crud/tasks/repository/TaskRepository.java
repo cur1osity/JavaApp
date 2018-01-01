@@ -11,21 +11,21 @@ import java.util.Optional;
 @Transactional
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    @Override
-    List<Task> findAll();
-
-    @Override
-    Optional<Task> findById(Long id);
-
-    @Override
-    Task save(Task task);
-
-    @Override
-    void deleteById(Long id);
-
-    @Override
-    void deleteAllInBatch();
-
-    @Override
-    boolean existsById(Long id);
+//    @Override
+//    List<Task> findAll();
+//
+//    @Override
+//    Optional<Task> findById(Long id);
+//
+//    @Override
+//    Task save(Task task);
+//
+//    @Override
+//    void deleteById(Long id);
+//
+//    @Override
+//    void deleteAllInBatch();
+//
+//    @Override
+//    boolean existsById(Long id);
 }
