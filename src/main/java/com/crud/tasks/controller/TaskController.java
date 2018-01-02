@@ -24,12 +24,8 @@ public class TaskController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<TaskDto> getTasks() throws TaskNotFoundException {
+    public List<TaskDto> getTasks() {
         List<Task> allTasks = service.getAllTasks();
-
-        if (allTasks.isEmpty()) {
-            throw new TaskNotFoundException();
-        }
         return taskMapper.mapToTaskDtoList(allTasks);
     }
 
