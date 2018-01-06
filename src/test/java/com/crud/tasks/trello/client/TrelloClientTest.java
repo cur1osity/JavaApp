@@ -62,15 +62,16 @@ public class TrelloClientTest {
     }
 
     @Test
-    public void shouldCreateCard()throws URISyntaxException {
+    public void shouldCreateCard() throws URISyntaxException {
 
         // Given
-        TrelloCardDto trelloCardDto = new TrelloCardDto(
+        TrelloCardDto trelloCardDto = new TrelloCardDto (
                 "Test task",
                 "Test description",
                 "top",
-                "test_id",
-                new TrelloBadgesDto(0, new TrelloAttachmentsByTypeDto(new TrelloTrelloDto(0, 0))));
+                "test_id"
+                );
+
 
         // When
         URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20task&desc=Test%20description&pos=top&idList=test_id");
@@ -79,7 +80,7 @@ public class TrelloClientTest {
                 "1",
                 "Test task",
                 "http://test.com",
-                new TrelloBadgesDto(1, new TrelloAttachmentsByTypeDto(new TrelloTrelloDto(1, 1)))
+                new TrelloBadgesDto(0, new TrelloAttachmentsByTypeDto(new TrelloTrelloDto(0, 0)))
 
         );
 
@@ -91,14 +92,14 @@ public class TrelloClientTest {
         assertEquals("1", newCard.getId());
         assertEquals("Test task", newCard.getName());
         assertEquals("http://test.com", newCard.getShortUrl());
-        assertEquals(1, newCard.getTrelloBadgesDto().getVotes());
-        assertEquals(1, newCard.getTrelloBadgesDto().getTrelloAttachmentsByTypeDto().getTrelloTrelloDto().getBoard());
-        assertEquals(1, newCard.getTrelloBadgesDto().getTrelloAttachmentsByTypeDto().getTrelloTrelloDto().getCard());
+        assertEquals(0, newCard.getTrelloBadgesDto().getVotes());
+        assertEquals(0, newCard.getTrelloBadgesDto().getTrelloAttachmentsByTypeDto().getTrelloTrelloDto().getBoard());
+        assertEquals(0, newCard.getTrelloBadgesDto().getTrelloAttachmentsByTypeDto().getTrelloTrelloDto().getCard());
     }
 
 
     @Test
-    public void shouldReturnEmptyList()throws URISyntaxException {
+    public void shouldReturnEmptyList() throws URISyntaxException {
 
         //  Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[0];
