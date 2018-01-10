@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import static java.util.Optional.ofNullable;
 
-
 @Component
 public class TrelloClient {
 
@@ -35,7 +34,7 @@ public class TrelloClient {
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("fields", "name,id")
-                .queryParam("lists", "all")
+                .queryParam("lists", "open")
                 .build().encode().toUri();
     }
 
@@ -63,6 +62,7 @@ public class TrelloClient {
                 .queryParam("idList", trelloCardDto.getListId())
 //                .queryParam("badges", trelloCardDto.getTrelloBadgesDto())
                 .build().encode().toUri();
+
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 }
