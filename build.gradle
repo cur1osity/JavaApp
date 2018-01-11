@@ -38,6 +38,7 @@ dependencies {
 	compile('mysql:mysql-connector-java')
 	compile('io.springfox:springfox-swagger2:2.7.0')
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
+	compile ('org.springframework.boot:spring-boot-starter-mail:2.0.0.M7')
 //	compile('org.postgresql:postgresql')
 //	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 }
