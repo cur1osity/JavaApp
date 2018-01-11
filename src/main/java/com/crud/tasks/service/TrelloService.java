@@ -8,9 +8,7 @@ import com.crud.tasks.trello.client.CreatedTrelloCard;
 import com.crud.tasks.trello.client.TrelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 import static java.util.Optional.ofNullable;
 
 @Service
@@ -38,9 +36,9 @@ public class TrelloService {
                 card -> emailService.send(
                         new Mail(
                                 adminConfig.getAdminMail(),
-                                null,
+                                adminConfig.getSecondEmail(),
                                 SUBJECT,
-                                "New card: "  + card.getName() + " has created on your Trello account")));
+                                "New card: "  + card.getName() + " has been created on your Trello account")));
 
         return newCard;
     }
