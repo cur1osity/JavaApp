@@ -31,16 +31,28 @@ public class EmailScheduler {
                         adminConfig.getAdminMail(),
                         adminConfig.getSecondEmail(),
                         SUBJECT,
-                        "Currently in database you got: " + taskRepository.count() + " " + singularOrPlural())
+                        "Currently in database you got: " + taskCount() + " " + singularOrPlural())
         );
     }
 
 
     private String singularOrPlural() {
 
-        if(taskRepository.count() == 1) {
+        if (taskCount() == 1) {
             return "task";
         }
         return "tasks";
+    }
+
+    private long taskCount() {
+
+        long taskCount;
+
+        try {
+            taskCount = taskRepository.count();
+        } catch (NullPointerException ex) {
+            return 0L;
+        }
+        return taskCount;
     }
 }
