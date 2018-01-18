@@ -26,33 +26,27 @@ public class EmailScheduler {
 //    @Scheduled(fixedDelay = 30000)
     public void sendInformationEmail() {
 
+        long taskCount = taskCount();
+
         simpleEmailService.send(
                 new Mail(
                         adminConfig.getAdminMail(),
                         adminConfig.getSecondEmail(),
                         SUBJECT,
-                        "Currently in database you got: " + taskCount() + " " + singularOrPlural())
+                        "Currently in database you got: " + taskCount + " " + singularOrPlural(taskCount))
         );
     }
 
 
-    private String singularOrPlural() {
+    private String singularOrPlural(Long taskCount) {
 
-        if (taskCount() == 1) {
+        if (taskCount == 1) {
             return "task";
         }
         return "tasks";
     }
 
     private long taskCount() {
-
-        long taskCount;
-
-        try {
-            taskCount = taskRepository.count();
-        } catch (NullPointerException ex) {
-            return 0L;
-        }
-        return taskCount;
+        return taskRepository.count();
     }
 }
