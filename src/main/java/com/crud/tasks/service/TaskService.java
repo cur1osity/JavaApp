@@ -23,6 +23,7 @@ public class TaskService {
     }
 
     public Task saveTask (final Task task) {
+        task.setId(null);
         return repository.save(task);
     }
 
@@ -36,10 +37,6 @@ public class TaskService {
         }
 
         throw new TaskNotFoundException();
-    }
-
-    public boolean isTaskExist(Long id) {
-        return repository.existsById(id);
     }
 
     public void deleteTask(Long id) {
