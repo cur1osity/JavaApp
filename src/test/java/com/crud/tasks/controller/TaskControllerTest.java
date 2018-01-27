@@ -1,11 +1,10 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.builders.TaskBuilder;
-import com.crud.tasks.builders.TaskDtoBuilder;
 import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.TaskService;
 import com.google.gson.Gson;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +13,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
@@ -32,6 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(TaskController.class)
 public class TaskControllerTest {
 
+    private static final Long TASK_DTO1_ID = 1L;
+    private static TaskDto TASK_DTO1;
+    private static TaskDto TASK_DTO2;
+    private static Long TASK1_ID;
+    private static Task TASK1;
+    private static Task TASK2;
+    private static Task NEW_TASK;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -41,38 +46,40 @@ public class TaskControllerTest {
     @MockBean
     private TaskMapper taskMapper;
 
-    private static final Long TASK_DTO1_ID = 1L;
-    private static final TaskDto TASK_DTO1 = new TaskDtoBuilder()
-            .id(TASK_DTO1_ID)
-            .title("Test1")
-            .content("Test1")
-            .build();
+    @Before
+    public void tasksInit() {
 
-    private static final TaskDto TASK_DTO2 = new TaskDtoBuilder()
-            .id(2L)
-            .title("Test2")
-            .content("Test2")
-            .build();
+        TASK_DTO1 = TaskDto.TaskDtoBuilder()
+                .id(TASK_DTO1_ID)
+                .title("Test1")
+                .content("Test1")
+                .build();
 
-    private static final Long TASK1_ID = 1L;
+        TASK_DTO2 = TaskDto.TaskDtoBuilder()
+                .id(2L)
+                .title("Test2")
+                .content("Test2")
+                .build();
 
-    private static final Task TASK1 = new TaskBuilder()
-            .id(TASK1_ID)
-            .title("Test1")
-            .content("Test1")
-            .build();
+        TASK1_ID = 1L;
 
-    private static final Task TASK2 = new TaskBuilder()
-            .id(2L)
-            .title("Test2")
-            .content("Test2")
-            .build();
+        TASK1 =  Task.TaskBuilder()
+                .id(TASK1_ID)
+                .title("Test1")
+                .content("Test1")
+                .build();
 
-    private static final Task NEW_TASK = new TaskBuilder()
-            .title("Test3")
-            .content("Test3")
-            .build();
+        TASK2 = Task.TaskBuilder()
+                .id(2L)
+                .title("Test2")
+                .content("Test2")
+                .build();
 
+        NEW_TASK = Task.TaskBuilder()
+                .title("Test3")
+                .content("Test3")
+                .build();
+    }
 
     @Test
     public void shouldGetEmptyTasksList() throws Exception {
@@ -121,7 +128,6 @@ public class TaskControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("Test1")));
-
     }
 
     @Test
@@ -135,8 +141,6 @@ public class TaskControllerTest {
         mockMvc.perform(get("/v1/tasks/{id}", 2L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
-
-
     }
 
     @Test
@@ -173,7 +177,6 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("Test1")));
     }
-
 
     @Test
     public void shouldNotUpdateTaskWhenTaskDoesntExist() throws Exception {

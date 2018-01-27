@@ -1,6 +1,7 @@
 package com.crud.tasks.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Data
 @Entity(name = "tasks")
+@Builder(builderMethodName = "TaskBuilder")
 public class Task {
 
     @Id

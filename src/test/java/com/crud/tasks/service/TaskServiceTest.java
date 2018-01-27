@@ -1,9 +1,9 @@
 package com.crud.tasks.service;
 
-import com.crud.tasks.builders.TaskBuilder;
 import com.crud.tasks.controller.TaskNotFoundException;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.repository.TaskRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -21,22 +21,9 @@ import static org.mockito.Mockito.*;
 public class TaskServiceTest {
 
     private static final Long TASK1_ID = 1L;
-    private static final Task TASK1 = new TaskBuilder()
-            .id(TASK1_ID)
-            .title("Test1")
-            .content("Test1")
-            .build();
-
-    private static final Task TASK2 = new TaskBuilder()
-            .id(2L)
-            .title("Test2")
-            .content("Test2")
-            .build();
-
-    private static final Task NEW_TASK = new TaskBuilder()
-            .title("Test2")
-            .content("Test2")
-            .build();
+    private static Task TASK1;
+    private static Task TASK2;
+    private static Task NEW_TASK;
 
     @InjectMocks
     private TaskService taskService;
@@ -45,6 +32,27 @@ public class TaskServiceTest {
     private TaskRepository repository;
 
     private ArgumentCaptor<Task> anyTask = ArgumentCaptor.forClass(Task.class);
+
+    @Before
+    public void tasksInit() {
+
+         TASK1 = Task.TaskBuilder()
+                .id(TASK1_ID)
+                .title("Test1")
+                .content("Test1")
+                .build();
+
+         TASK2 = Task.TaskBuilder()
+                .id(2L)
+                .title("Test2")
+                .content("Test2")
+                .build();
+
+         NEW_TASK = Task.TaskBuilder()
+                .title("Test2")
+                .content("Test2")
+                .build();
+    }
 
     @Test
     public void whenFindingTasksItShouldReturnAllTasks() {
