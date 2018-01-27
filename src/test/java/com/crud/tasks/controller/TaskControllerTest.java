@@ -32,7 +32,7 @@ public class TaskControllerTest {
     private static final Long TASK_DTO1_ID = 1L;
     private static TaskDto TASK_DTO1;
     private static TaskDto TASK_DTO2;
-    private static Long TASK1_ID;
+    private static final Long TASK1_ID = 1L;
     private static Task TASK1;
     private static Task TASK2;
     private static Task NEW_TASK;
@@ -60,8 +60,6 @@ public class TaskControllerTest {
                 .title("Test2")
                 .content("Test2")
                 .build();
-
-        TASK1_ID = 1L;
 
         TASK1 =  Task.TaskBuilder()
                 .id(TASK1_ID)
