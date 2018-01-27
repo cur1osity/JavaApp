@@ -57,7 +57,6 @@ public class TaskController {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void createTask(@RequestBody TaskDto taskDto) {
-
         final Task taskFromJSON = taskMapper.mapToTask(taskDto);
         service.saveTask(taskFromJSON);
     }
