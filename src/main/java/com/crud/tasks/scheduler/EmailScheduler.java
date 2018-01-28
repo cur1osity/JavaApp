@@ -25,18 +25,8 @@ public class EmailScheduler {
     @Scheduled(cron = "0 0 10 * * *")
 //    @Scheduled(fixedDelay = 30000)
     public void sendInformationEmail() {
-
-        long taskCount = taskCount();
-
-        simpleEmailService.send(
-                new Mail(
-                        adminConfig.getAdminMail(),
-                        adminConfig.getSecondEmail(),
-                        SUBJECT,
-                        "Currently in database you got: " + taskCount + " " + singularOrPlural(taskCount))
-        );
+        simpleEmailService.send(createMail());
     }
-
 
     private String singularOrPlural(Long taskCount) {
 
@@ -48,5 +38,15 @@ public class EmailScheduler {
 
     private long taskCount() {
         return taskRepository.count();
+    }
+
+    public Mail createMail() {
+
+        long taskCount = taskCount();
+
+        return new Mail(adminConfig.getAdminMail(),
+                adminConfig.getSecondEmail(),
+                SUBJECT,
+                "Currently in database you got: " + taskCount + " " + singularOrPlural(taskCount));
     }
 }
