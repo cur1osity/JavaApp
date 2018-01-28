@@ -40,7 +40,7 @@ public class EmailScheduler {
         return taskRepository.count();
     }
 
-    public Mail createMail() {
+    protected Mail createMail() {
 
         long taskCount = taskCount();
 
