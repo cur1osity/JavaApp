@@ -53,11 +53,13 @@ public class TrelloServiceTest {
     @Test
     public void whenNewTrelloCardIsCreatedShouldReturnCreatedTrelloCardDto() {
 
+        //Given
         TrelloCardDto trelloCardDto = new TrelloCardDto("TEST","TEST_DESC", "top","1");
         CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto("1","TEST","www.google.com");
 
         given(trelloClient.createNewCard(trelloCardDto)).willReturn(createdTrelloCardDto);
 
+        //When & Then
         assertThat(trelloService.createdTrelloCardDto(trelloCardDto)).isEqualToComparingFieldByField(createdTrelloCardDto);
     }
 }
