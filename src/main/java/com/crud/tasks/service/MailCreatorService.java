@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +45,21 @@ public class MailCreatorService {
         context.setVariable("is_friend", true);
         context.setVariable("application_functionality", functionality);
         return templateEngine.process("mail/created-trello-card-mail", context);
+    }
+
+    public String buildTasksNumberEmail(String message) {
+
+        Context context = new Context();
+        context.setVariable("message", message);
+        context.setVariable("tasks_url", "http://localhost");
+        context.setVariable("button", "Visit website");
+        context.setVariable("admin_config", adminConfig);
+        context.setVariable("message2", "Best regards,");
+        context.setVariable("comapnyName", companyName);
+        context.setVariable("companyEmail", companyEmail);
+        context.setVariable("show_button", true);
+        context.setVariable("is_friend", true);
+        return templateEngine.process("mail/number-of-tasks-mail", context);
     }
 
 }

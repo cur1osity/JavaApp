@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class SimpleEmailService {
+public class SimpleEmailService2 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
 
@@ -27,21 +27,9 @@ public class SimpleEmailService {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            messageHelper.setText(mailCreatorService.buildTasksNumberEmail(mail.getMessage()), true);
         };
     }
-
-//    private SimpleMailMessage createMailMessage(final Mail mail) {
-//        SimpleMailMessage mailMessage = new SimpleMailMessage();
-//        mailMessage.setTo(mail.getMailTo());
-//        mailMessage.setSubject(mail.getSubject());
-//        mailMessage.setText(mail.getMessage());
-//        if (mail.getToCc() != null) {
-//            mailMessage.setCc(mail.getToCc());
-//        }
-//
-//        return mailMessage;
-//    }
 
     public void send(final Mail mail) {
         LOGGER.info("Starting email preparation...");
@@ -50,7 +38,6 @@ public class SimpleEmailService {
         LOGGER.info("Email subject: " + mail.getSubject());
         LOGGER.info("Email message: " + mail.getMessage());
         try {
-//            SimpleMailMessage mailMessage = createMailMessage(mail);
             javaMailSender.send(createMimeMessage(mail));
             LOGGER.info("Email has been sent");
         } catch (MailException e) {
