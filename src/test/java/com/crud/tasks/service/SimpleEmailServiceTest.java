@@ -15,7 +15,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 public class SimpleEmailServiceTest {
 
     @InjectMocks
-    private SimpleEmailService simpleEmailService;
+    private SimpleEmailService3 simpleEmailService;
 
     @Mock
     private JavaMailSender javaMailSender;
