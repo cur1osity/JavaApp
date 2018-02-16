@@ -11,6 +11,9 @@ public class AdminConfig {
     @Value ("${admin.mail}")
     private String adminMail;
 
+    @Value ("${admin.name}")
+    private String adminName;
+
     @Value("${second.mail}")
     private String secondEmail;
 }
